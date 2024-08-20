@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://nkr0p06se7vp"]
+
+[ext_resource type="PackedScene" uid="uid://cnvohlywxc8uu" path="res://bay.tscn" id="1_pfdpu"]
+[ext_resource type="PackedScene" uid="uid://dht6lffq27tp8" path="res://assets/c551/clay.tscn" id="2_518h2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g1xv4"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_slabw"]
+sky_material = SubResource("ProceduralSkyMaterial_g1xv4")
+
+[sub_resource type="Environment" id="Environment_tbd2w"]
+background_mode = 2
+sky = SubResource("Sky_slabw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idma2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_igcuc"]
+material = SubResource("StandardMaterial3D_idma2")
+size = Vector3(5, 1, 5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tbd2w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.978717, 0.205214, 0, -0.205214, 0.978717, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.985222, 0.584453, 2.07353)
+fov = 30.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_igcuc")
+
+[node name="Bay" parent="." instance=ExtResource("1_pfdpu")]
+
+[node name="Clay" parent="." instance=ExtResource("2_518h2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21922, 0, 0)

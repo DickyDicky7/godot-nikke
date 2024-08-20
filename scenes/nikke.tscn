@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://bh6fkwga2xrow"]
+
+[ext_resource type="Script" path="res://scripts/objects/nikke/nikke.gd" id="1_hgvro"]
+[ext_resource type="Script" path="res://scripts/ultilities/quad_mesh.gd" id="2_0t1cd"]
+[ext_resource type="Script" path="res://scripts/ultilities/state_machine.gd" id="3_bknmx"]
+[ext_resource type="Script" path="res://scenes/nikke_sub_viewport.gd" id="3_q18h5"]
+[ext_resource type="Script" path="res://scripts/objects/nikke/state_nikke_aim.gd" id="4_x2g7y"]
+[ext_resource type="Script" path="res://scripts/objects/nikke/state_nikke_cover.gd" id="6_pais7"]
+[ext_resource type="Script" path="res://scripts/objects/nikke/state_nikke_standing.gd" id="8_exb3e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlhll"]
+transparency = 1
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_blf2i"]
+material = SubResource("StandardMaterial3D_hlhll")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e6ps0"]
+margin = 0.05
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="Nikke" type="Node3D"]
+script = ExtResource("1_hgvro")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="NikkeQuadMesh" type="MeshInstance3D" parent="Visuals" node_paths=PackedStringArray("sub_viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("QuadMesh_blf2i")
+script = ExtResource("2_0t1cd")
+sub_viewport = NodePath("../NikkeSub_Viewport")
+
+[node name="NikkeSub_Viewport" type="SubViewport" parent="Visuals" node_paths=PackedStringArray("spine_sprites_to_load")]
+transparent_bg = true
+size = Vector2i(3000, 3000)
+script = ExtResource("3_q18h5")
+spine_sprites_to_load = [NodePath("../SpineSpriteAim"), NodePath("../SpineSprite___Cover"), NodePath("../SpineSpriteStanding")]
+
+[node name="SpineSpriteAim" type="SpineSprite" parent="Visuals"]
+position = Vector2(1500, 2770)
+
+[node name="SpineSprite___Cover" type="SpineSprite" parent="Visuals"]
+position = Vector2(1500, 2770)
+
+[node name="SpineSpriteStanding" type="SpineSprite" parent="Visuals"]
+position = Vector2(1500, 2770)
+
+[node name="Physics" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="Physics"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Physics/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_e6ps0")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("active_states")]
+script = ExtResource("3_bknmx")
+active_states = [NodePath("StateNikke___Cover")]
+
+[node name="StateNikkeAim" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_after_to_cover_animation", "spine_sprite", "area_3d")]
+script = ExtResource("4_x2g7y")
+state_after_to_cover_animation = NodePath("../StateNikke___Cover")
+spine_sprite = NodePath("../../Visuals/SpineSpriteAim")
+area_3d = NodePath("../../Physics/Area3D")
+
+[node name="StateNikke___Cover" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_after_to_aim_animation", "spine_sprite", "area_3d")]
+script = ExtResource("6_pais7")
+state_after_to_aim_animation = NodePath("../StateNikkeAim")
+spine_sprite = NodePath("../../Visuals/SpineSprite___Cover")
+area_3d = NodePath("../../Physics/Area3D")
+
+[node name="StateNikkeStanding" type="Node" parent="StateMachine" node_paths=PackedStringArray("spine_sprite", "area_3d")]
+script = ExtResource("8_exb3e")
+spine_sprite = NodePath("../../Visuals/SpineSpriteStanding")
+area_3d = NodePath("../../Physics/Area3D")

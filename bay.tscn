@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnvohlywxc8uu"]
+
+[ext_resource type="PackedScene" uid="uid://bh6fkwga2xrow" path="res://scenes/nikke.tscn" id="1_j8hi3"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://btuegfjdb5nhs" path="res://assets/c550/spine_skeleton_data_resource_bay_aim.tres" id="2_c2gh3"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c1xenkhe8kvmr" path="res://assets/c550/spine_skeleton_data_resource_bay_cover.tres" id="3_l400q"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dw0wryk7ypbiu" path="res://assets/c550/spine_skeleton_data_resource_bay_standing.tres" id="4_rerhm"]
+
+[node name="Bay" instance=ExtResource("1_j8hi3")]
+
+[node name="SpineSpriteAim" parent="Visuals" index="2"]
+skeleton_data_res = ExtResource("2_c2gh3")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineSprite___Cover" parent="Visuals" index="3"]
+skeleton_data_res = ExtResource("3_l400q")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineSpriteStanding" parent="Visuals" index="4"]
+skeleton_data_res = ExtResource("4_rerhm")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0

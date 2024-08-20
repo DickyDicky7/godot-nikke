@@ -1,0 +1,15 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bxemuiweohx1p"
+path="res://.godot/imported/c550_cover_00.atlas-6aca25e3ffa7ca7e804f28226de5d567.spatlas"
+
+[deps]
+
+source_file="res://assets/c550/cover/c550_cover_00.atlas"
+dest_files=["res://.godot/imported/c550_cover_00.atlas-6aca25e3ffa7ca7e804f28226de5d567.spatlas"]
+
+[params]
+
+normal_map_prefix="n"

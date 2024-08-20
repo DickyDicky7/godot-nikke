@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dht6lffq27tp8"]
+
+[ext_resource type="PackedScene" uid="uid://bh6fkwga2xrow" path="res://scenes/nikke.tscn" id="1_1vtxm"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://px3obt0oacqg" path="res://assets/c551/spine_skeleton_data_resource_clay_aim.tres" id="2_hslga"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cx1kh80lrhcyp" path="res://assets/c551/spine_skeleton_data_resource_clay_cover.tres" id="3_gduje"]
+[ext_resource type="Script" path="res://nikke_spine_bone_node.gd" id="3_thxnu"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c7lk6l7yy3ynh" path="res://assets/c551/spine_skeleton_data_resource_clay_standing.tres" id="4_s1r1e"]
+[ext_resource type="Script" path="res://nikke_jiggle_effect_resource.gd" id="6_2p8vt"]
+
+[sub_resource type="Resource" id="Resource_4um0u"]
+script = ExtResource("6_2p8vt")
+spine_bone_node_path = NodePath("../../Visuals/SpineSpriteAim/NikkeSpineBoneNode")
+offset_position_when_jiggle = Vector2(0, -200)
+tran_type_when_jiggle = 1
+ease_type_when_jiggle = 1
+_duration_when_jiggle = 0.3
+
+[node name="Clay" instance=ExtResource("1_1vtxm")]
+
+[node name="SpineSpriteAim" parent="Visuals" index="2"]
+skeleton_data_res = ExtResource("2_hslga")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="NikkeSpineBoneNode" type="SpineBoneNode" parent="Visuals/SpineSpriteAim" index="47"]
+show_behind_parent = true
+script = ExtResource("3_thxnu")
+name_bone = "@chest_9"
+
+[node name="SpineSprite___Cover" parent="Visuals" index="3"]
+skeleton_data_res = ExtResource("3_gduje")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineSpriteStanding" parent="Visuals" index="4"]
+skeleton_data_res = ExtResource("4_s1r1e")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="StateNikkeAim" parent="StateMachine" index="0"]
+nikke_jiggle_effect_resources_when_aim_fire = Array[ExtResource("6_2p8vt")]([SubResource("Resource_4um0u")])

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cf2tmpjvt2nj3"
+path="res://.godot/imported/c550_cover_00.skel-3f23476881156b113ccbb84971557164.spskel"
+
+[deps]
+
+source_file="res://assets/c550/cover/c550_cover_00.skel"
+dest_files=["res://.godot/imported/c550_cover_00.skel-3f23476881156b113ccbb84971557164.spskel"]
+
+[params]
+
